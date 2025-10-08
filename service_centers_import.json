@@ -1,0 +1,295 @@
+{
+  "serviceCenters": [
+    {
+      "name": "Downtown Premium Wash",
+      "imageUrl": "assets/images/center1.jpg",
+      "location": "123 Main Street, Downtown, NY 10001",
+      "latitude": 40.7128,
+      "longitude": -74.0060,
+      "businessHours": "08:00 - 20:00",
+      "contactNumber": "+1-555-0101",
+      "isInBusiness": true,
+      "description": "Premium car wash service in downtown Manhattan with state-of-the-art equipment and experienced staff. We offer eco-friendly cleaning solutions.",
+      "membershipCards": [
+        {
+          "type": "monthly",
+          "name": "Monthly Card",
+          "days": 30,
+          "price": 159,
+          "imageUrl": ""
+        },
+        {
+          "type": "seasonal",
+          "name": "Seasonal Card",
+          "days": 90,
+          "price": 299,
+          "originalPrice": 1080,
+          "imageUrl": ""
+        },
+        {
+          "type": "annual",
+          "name": "Annual Card",
+          "days": 360,
+          "price": 498,
+          "originalPrice": 6220,
+          "imageUrl": ""
+        }
+      ]
+    },
+    {
+      "name": "Uptown Auto Spa",
+      "imageUrl": "assets/images/center2.jpg",
+      "location": "456 Park Avenue, Uptown, NY 10021",
+      "latitude": 40.7489,
+      "longitude": -73.9680,
+      "businessHours": "07:00 - 19:00",
+      "contactNumber": "+1-555-0102",
+      "isInBusiness": true,
+      "description": "Luxury auto spa offering premium washing, detailing, and maintenance services. Interior and exterior care specialists.",
+      "membershipCards": [
+        {
+          "type": "monthly",
+          "name": "Monthly Card",
+          "days": 30,
+          "price": 159,
+          "imageUrl": ""
+        },
+        {
+          "type": "seasonal",
+          "name": "Seasonal Card",
+          "days": 90,
+          "price": 299,
+          "originalPrice": 1080,
+          "imageUrl": ""
+        },
+        {
+          "type": "annual",
+          "name": "Annual Card",
+          "days": 360,
+          "price": 498,
+          "originalPrice": 6220,
+          "imageUrl": ""
+        }
+      ]
+    },
+    {
+      "name": "Brooklyn Car Care",
+      "imageUrl": "assets/images/center3.jpg",
+      "location": "789 Brooklyn Avenue, Brooklyn, NY 11201",
+      "latitude": 40.6782,
+      "longitude": -73.9442,
+      "businessHours": "06:00 - 22:00",
+      "contactNumber": "+1-555-0103",
+      "isInBusiness": true,
+      "description": "Extended hours car wash with membership benefits and loyalty rewards. Convenient location with quick service.",
+      "membershipCards": [
+        {
+          "type": "monthly",
+          "name": "Monthly Card",
+          "days": 30,
+          "price": 159,
+          "imageUrl": ""
+        },
+        {
+          "type": "seasonal",
+          "name": "Seasonal Card",
+          "days": 90,
+          "price": 299,
+          "originalPrice": 1080,
+          "imageUrl": ""
+        },
+        {
+          "type": "annual",
+          "name": "Annual Card",
+          "days": 360,
+          "price": 498,
+          "originalPrice": 6220,
+          "imageUrl": ""
+        }
+      ]
+    },
+    {
+      "name": "Queens Express Wash",
+      "imageUrl": "assets/images/center4.jpg",
+      "location": "321 Queens Boulevard, Queens, NY 11375",
+      "latitude": 40.7282,
+      "longitude": -73.7949,
+      "businessHours": "07:00 - 21:00",
+      "contactNumber": "+1-555-0104",
+      "isInBusiness": true,
+      "description": "Fast and efficient car wash service with automated and hand-wash options. Family-owned and operated since 2010.",
+      "membershipCards": [
+        {
+          "type": "monthly",
+          "name": "Monthly Card",
+          "days": 30,
+          "price": 159,
+          "imageUrl": ""
+        },
+        {
+          "type": "seasonal",
+          "name": "Seasonal Card",
+          "days": 90,
+          "price": 299,
+          "originalPrice": 1080,
+          "imageUrl": ""
+        },
+        {
+          "type": "annual",
+          "name": "Annual Card",
+          "days": 360,
+          "price": 498,
+          "originalPrice": 6220,
+          "imageUrl": ""
+        }
+      ]
+    },
+    {
+      "name": "Bronx Auto Detailing",
+      "imageUrl": "assets/images/center5.jpg",
+      "location": "555 Grand Concourse, Bronx, NY 10451",
+      "latitude": 40.8448,
+      "longitude": -73.9252,
+      "businessHours": "08:00 - 18:00",
+      "contactNumber": "+1-555-0105",
+      "isInBusiness": true,
+      "description": "Professional detailing services with ceramic coating, paint protection, and interior restoration. Premium service guaranteed.",
+      "membershipCards": [
+        {
+          "type": "monthly",
+          "name": "Monthly Card",
+          "days": 30,
+          "price": 159,
+          "imageUrl": ""
+        },
+        {
+          "type": "seasonal",
+          "name": "Seasonal Card",
+          "days": 90,
+          "price": 299,
+          "originalPrice": 1080,
+          "imageUrl": ""
+        },
+        {
+          "type": "annual",
+          "name": "Annual Card",
+          "days": 360,
+          "price": 498,
+          "originalPrice": 6220,
+          "imageUrl": ""
+        }
+      ]
+    },
+    {
+      "name": "Staten Island Shine",
+      "imageUrl": "assets/images/center6.jpg",
+      "location": "777 Victory Boulevard, Staten Island, NY 10301",
+      "latitude": 40.6437,
+      "longitude": -74.0831,
+      "businessHours": "09:00 - 19:00",
+      "contactNumber": "+1-555-0106",
+      "isInBusiness": true,
+      "description": "Full-service car wash and detailing center. We use environmentally friendly products and offer vacuum services.",
+      "membershipCards": [
+        {
+          "type": "monthly",
+          "name": "Monthly Card",
+          "days": 30,
+          "price": 159,
+          "imageUrl": ""
+        },
+        {
+          "type": "seasonal",
+          "name": "Seasonal Card",
+          "days": 90,
+          "price": 299,
+          "originalPrice": 1080,
+          "imageUrl": ""
+        },
+        {
+          "type": "annual",
+          "name": "Annual Card",
+          "days": 360,
+          "price": 498,
+          "originalPrice": 6220,
+          "imageUrl": ""
+        }
+      ]
+    },
+    {
+      "name": "Midtown Express Clean",
+      "imageUrl": "assets/images/center7.jpg",
+      "location": "888 5th Avenue, Midtown, NY 10022",
+      "latitude": 40.7614,
+      "longitude": -73.9776,
+      "businessHours": "06:00 - 23:00",
+      "contactNumber": "+1-555-0107",
+      "isInBusiness": true,
+      "description": "Convenient midtown location with express service. Perfect for busy professionals. Open late for your convenience.",
+      "membershipCards": [
+        {
+          "type": "monthly",
+          "name": "Monthly Card",
+          "days": 30,
+          "price": 159,
+          "imageUrl": ""
+        },
+        {
+          "type": "seasonal",
+          "name": "Seasonal Card",
+          "days": 90,
+          "price": 299,
+          "originalPrice": 1080,
+          "imageUrl": ""
+        },
+        {
+          "type": "annual",
+          "name": "Annual Card",
+          "days": 360,
+          "price": 498,
+          "originalPrice": 6220,
+          "imageUrl": ""
+        }
+      ]
+    },
+    {
+      "name": "Harlem Wash & Shine",
+      "imageUrl": "assets/images/center8.jpg",
+      "location": "999 Malcolm X Boulevard, Harlem, NY 10026",
+      "latitude": 40.8075,
+      "longitude": -73.9525,
+      "businessHours": "07:00 - 20:00",
+      "contactNumber": "+1-555-0108",
+      "isInBusiness": false,
+      "description": "Community-focused car wash with affordable prices. Currently closed for renovations - reopening soon with upgraded facilities!",
+      "membershipCards": [
+        {
+          "type": "monthly",
+          "name": "Monthly Card",
+          "days": 30,
+          "price": 159,
+          "imageUrl": ""
+        },
+        {
+          "type": "seasonal",
+          "name": "Seasonal Card",
+          "days": 90,
+          "price": 299,
+          "originalPrice": 1080,
+          "imageUrl": ""
+        },
+        {
+          "type": "annual",
+          "name": "Annual Card",
+          "days": 360,
+          "price": 498,
+          "originalPrice": 6220,
+          "imageUrl": ""
+        }
+      ]
+    }
+  ]
+}
+
+
+
