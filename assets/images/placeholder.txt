@@ -1,0 +1,10 @@
+Place your custom images here:
+- banner1.jpg
+- banner2.jpg
+- banner3.jpg
+- service_center_placeholder.jpg
+
+The app uses online images by default, but you can replace them with local assets.
+
+
+
