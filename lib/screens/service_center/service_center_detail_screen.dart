@@ -5,6 +5,7 @@ import '../../config/theme.dart';
 import '../../models/service_center_model.dart';
 import '../scan/scan_screen.dart';
 import '../card_purchase/card_purchase_screen.dart';
+import '../booking/booking_screen.dart';
 
 class ServiceCenterDetailScreen extends StatelessWidget {
   final ServiceCenterModel serviceCenter;
@@ -188,7 +189,7 @@ class ServiceCenterDetailScreen extends StatelessWidget {
                 
                 const SizedBox(height: 20),
                 
-                // Scan code button
+                // Book Service button
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SizedBox(
@@ -197,12 +198,39 @@ class ServiceCenterDetailScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
+                          MaterialPageRoute(
+                            builder: (_) => BookingScreen(serviceCenter: serviceCenter),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.calendar_today),
+                      label: const Text('Book Service'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(16),
+                        backgroundColor: AppTheme.primaryColor,
+                        foregroundColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Scan code button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
                           MaterialPageRoute(builder: (_) => const ScanScreen()),
                         );
                       },
                       icon: const Icon(Icons.qr_code_scanner),
                       label: const Text('Scan Code'),
-                      style: ElevatedButton.styleFrom(
+                      style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.all(16),
                       ),
                     ),
