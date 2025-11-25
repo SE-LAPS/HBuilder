@@ -10,7 +10,7 @@ class AppTheme {
   
   static ThemeData lightTheme = ThemeData(
     primaryColor: primaryColor,
-    scaffoldBackgroundColor: backgroundColor,
+    scaffoldBackgroundColor: Colors.transparent,
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
       primary: primaryColor,
