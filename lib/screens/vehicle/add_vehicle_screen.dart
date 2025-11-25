@@ -26,12 +26,13 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
   final List<String> _vehicleTypes = ['Car', 'SUV', 'Truck', 'Van', 'Motorcycle', 'Other'];
   
   bool _isLoading = false;
+  String? _editingVehicleId; // Track if we are editing
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Vehicle'),
+        title: Text(_editingVehicleId == null ? 'Add Vehicle' : 'Edit Vehicle'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -49,10 +50,10 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
               
               const SizedBox(height: 20),
               
-              const Text(
-                'Add Your Vehicle',
+              Text(
+                _editingVehicleId == null ? 'Add Your Vehicle' : 'Update Your Vehicle',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -155,19 +156,36 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
               
               const SizedBox(height: 30),
               
-              // Add button
-              ElevatedButton(
-                onPressed: _isLoading ? null : _addVehicle,
-                child: _isLoading
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              // Add/Update button
+              Row(
+                children: [
+                  if (_editingVehicleId != null)
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: OutlinedButton(
+                          onPressed: _cancelEdit,
+                          child: const Text('Cancel'),
                         ),
-                      )
-                    : const Text('Add Vehicle'),
+                      ),
+                    ),
+                  Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+                      onPressed: _isLoading ? null : _saveVehicle,
+                      child: _isLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                            )
+                          : Text(_editingVehicleId == null ? 'Add Vehicle' : 'Update Vehicle'),
+                    ),
+                  ),
+                ],
               ),
               
               const SizedBox(height: 20),
@@ -260,9 +278,18 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
                         ),
                       ],
                     ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () => _confirmDeleteVehicle(vehicle),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit, color: Colors.blue),
+                          onPressed: () => _startEdit(vehicle),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () => _confirmDeleteVehicle(vehicle),
+                        ),
+                      ],
                     ),
                   ),
                 );
@@ -274,13 +301,43 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
     );
   }
 
-  Future<void> _addVehicle() async {
+  void _startEdit(VehicleModel vehicle) {
+    setState(() {
+      _editingVehicleId = vehicle.id;
+      _vehicleNameController.text = vehicle.vehicleName;
+      _vehicleNumberController.text = vehicle.vehicleNumber;
+      _selectedVehicleType = _vehicleTypes.contains(vehicle.vehicleType) ? vehicle.vehicleType : 'Other';
+      _brandController.text = vehicle.brand ?? '';
+      _modelController.text = vehicle.model ?? '';
+      _colorController.text = vehicle.color ?? '';
+    });
+    // Scroll to top
+    Scrollable.ensureVisible(context, alignment: 0.0);
+  }
+
+  void _cancelEdit() {
+    setState(() {
+      _editingVehicleId = null;
+      _clearForm();
+    });
+  }
+
+  void _clearForm() {
+    _vehicleNameController.clear();
+    _vehicleNumberController.clear();
+    _brandController.clear();
+    _modelController.clear();
+    _colorController.clear();
+    _selectedVehicleType = 'Car';
+  }
+
+  Future<void> _saveVehicle() async {
     if (_formKey.currentState!.validate()) {
       final authProvider = context.read<AuthProvider>();
       
       if (authProvider.user == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please sign in to add vehicles')),
+          const SnackBar(content: Text('Please sign in to manage vehicles')),
         );
         return;
       }
@@ -291,7 +348,7 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
 
       try {
         final vehicle = VehicleModel(
-          id: '',
+          id: _editingVehicleId ?? '', // ID is ignored for add, used for update
           userId: authProvider.user!.uid,
           vehicleName: _vehicleNameController.text.trim(),
           vehicleNumber: _vehicleNumberController.text.trim().toUpperCase(),
@@ -299,26 +356,35 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
           brand: _brandController.text.trim().isEmpty ? null : _brandController.text.trim(),
           model: _modelController.text.trim().isEmpty ? null : _modelController.text.trim(),
           color: _colorController.text.trim().isEmpty ? null : _colorController.text.trim(),
-          addedAt: DateTime.now(),
+          addedAt: DateTime.now(), // In real app, preserve original addedAt for updates
         );
 
-        await _firestoreService.addVehicle(vehicle);
+        if (_editingVehicleId != null) {
+          await _firestoreService.updateVehicle(vehicle);
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text('Vehicle updated successfully!'),
+                backgroundColor: AppTheme.successColor,
+              ),
+            );
+          }
+        } else {
+          await _firestoreService.addVehicle(vehicle);
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text('Vehicle added successfully!'),
+                backgroundColor: AppTheme.successColor,
+              ),
+            );
+          }
+        }
 
         if (!mounted) return;
 
-        // Clear form
-        _vehicleNameController.clear();
-        _vehicleNumberController.clear();
-        _brandController.clear();
-        _modelController.clear();
-        _colorController.clear();
+        _cancelEdit(); // Clears form and resets state
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Vehicle added successfully!'),
-            backgroundColor: AppTheme.successColor,
-          ),
-        );
       } catch (e) {
         if (!mounted) return;
         
@@ -363,6 +429,11 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
         
         if (!mounted) return;
         
+        // If we were editing this vehicle, cancel edit
+        if (_editingVehicleId == vehicle.id) {
+          _cancelEdit();
+        }
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Vehicle deleted successfully'),
