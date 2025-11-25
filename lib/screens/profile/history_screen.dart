@@ -65,33 +65,47 @@ class HistoryScreen extends StatelessWidget {
   }
 
   Widget _buildHistoryItem(Map<String, dynamic> purchase) {
-    final cardType = purchase['cardType'] ?? '';
+    final type = purchase['cardType'] ?? 'service'; // Reusing field for type
     final amount = purchase['amount'] ?? 0.0;
     final timestamp = purchase['purchasedAt'];
     
-    String cardName;
-    Color cardColor;
-    switch (cardType) {
+    String title;
+    Color iconColor;
+    IconData icon;
+
+    switch (type) {
       case 'monthly':
-        cardName = 'Monthly Card';
-        cardColor = const Color(0xFF2196F3);
+        title = 'Monthly Card';
+        iconColor = const Color(0xFF2196F3);
+        icon = Icons.card_membership;
         break;
       case 'seasonal':
-        cardName = 'Seasonal Card';
-        cardColor = const Color(0xFF4CAF50);
+        title = 'Seasonal Card';
+        iconColor = const Color(0xFF4CAF50);
+        icon = Icons.card_membership;
         break;
       case 'annual':
-        cardName = 'Annual Card';
-        cardColor = const Color(0xFFFF9800);
+        title = 'Annual Card';
+        iconColor = const Color(0xFFFF9800);
+        icon = Icons.card_membership;
+        break;
+      case 'card':
+      case 'genie':
+      case 'frimi':
+        title = 'Service Booking';
+        iconColor = AppTheme.primaryColor;
+        icon = Icons.local_car_wash;
         break;
       default:
-        cardName = 'Membership Card';
-        cardColor = AppTheme.primaryColor;
+        title = 'Transaction';
+        iconColor = Colors.grey;
+        icon = Icons.payment;
     }
 
     String dateStr = 'Recently';
     if (timestamp != null) {
-      final date = timestamp.toDate();
+      // Handle Firestore Timestamp or DateTime
+      final date = (timestamp as dynamic).toDate();
       dateStr = DateFormat('MMM dd, yyyy - HH:mm').format(date);
     }
 
@@ -99,32 +113,45 @@ class HistoryScreen extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: cardColor,
-          child: const Icon(
-            Icons.card_membership,
+          backgroundColor: iconColor,
+          child: Icon(
+            icon,
             color: Colors.white,
           ),
         ),
         title: Text(
-          cardName,
+          title,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
         ),
-        subtitle: Text(
-          dateStr,
-          style: TextStyle(
-            fontSize: 12,
-            color: AppTheme.greyColor,
-          ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              dateStr,
+              style: TextStyle(
+                fontSize: 12,
+                color: AppTheme.greyColor,
+              ),
+            ),
+            if (type == 'card' || type == 'genie' || type == 'frimi')
+              Text(
+                'Paid via ${type[0].toUpperCase()}${type.substring(1)}',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: AppTheme.greyColor,
+                ),
+              ),
+          ],
         ),
         trailing: Text(
-          '\$${amount.toStringAsFixed(0)}',
+          '\$${amount.toStringAsFixed(2)}',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: cardColor,
+            color: iconColor,
           ),
         ),
       ),
