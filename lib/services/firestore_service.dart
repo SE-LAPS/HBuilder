@@ -46,6 +46,10 @@ class FirestoreService {
     await _firestore.collection('vehicles').doc(vehicleId).delete();
   }
 
+  Future<void> updateVehicle(VehicleModel vehicle) async {
+    await _firestore.collection('vehicles').doc(vehicle.id).update(vehicle.toMap());
+  }
+
   // Franchise Application
   Future<void> submitFranchiseApplication({
     required String name,
