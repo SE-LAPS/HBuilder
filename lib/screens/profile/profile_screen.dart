@@ -7,6 +7,7 @@ import '../auth/sign_in_screen.dart';
 import 'history_screen.dart';
 import 'settings_screen.dart';
 import 'about_screen.dart';
+import '../support/support_chat_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -141,7 +142,10 @@ class ProfileScreen extends StatelessWidget {
               title: 'Help & Support',
               subtitle: 'Get help with the app',
               onTap: () {
-                _showHelpDialog(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SupportChatScreen()),
+                );
               },
             ),
             
