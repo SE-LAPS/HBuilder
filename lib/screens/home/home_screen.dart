@@ -10,6 +10,7 @@ import '../service_center/service_center_detail_screen.dart';
 import '../card_purchase/card_purchase_screen.dart';
 import '../vehicle/add_vehicle_screen.dart';
 import '../franchise/franchise_application_screen.dart';
+import 'map_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -127,6 +128,17 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         children: [
           _buildActionButton(
+            icon: Icons.map,
+            label: 'Find Stations',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const MapScreen()),
+              );
+            },
+          ),
+          const SizedBox(width: 8),
+          _buildActionButton(
             icon: Icons.card_membership,
             label: 'Card Purchase',
             onTap: () {
@@ -144,17 +156,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const AddVehicleScreen()),
-              );
-            },
-          ),
-          const SizedBox(width: 8),
-          _buildActionButton(
-            icon: Icons.business,
-            label: 'Apply for Accession',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const FranchiseApplicationScreen()),
               );
             },
           ),
