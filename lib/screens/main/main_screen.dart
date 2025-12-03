@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../config/theme.dart';
 import '../home/home_screen.dart';
 import '../scan/scan_screen.dart';
 import '../profile/profile_screen.dart';
