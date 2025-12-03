@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../config/theme.dart';
 import '../../providers/auth_provider.dart';
 import '../main/main_screen.dart';
@@ -15,11 +16,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
-  
+
   late Timer _timer;
   String _timeString = '';
 
@@ -27,7 +27,10 @@ class _SignInScreenState extends State<SignInScreen> {
   void initState() {
     super.initState();
     _updateTime();
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => _updateTime());
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (Timer t) => _updateTime(),
+    );
   }
 
   void _updateTime() {
@@ -58,20 +61,14 @@ class _SignInScreenState extends State<SignInScreen> {
           Positioned(
             left: 0,
             top: 200,
-            child: Image.asset(
-              'assets/icons/shapes png-02.png',
-              height: 200,
-            ),
+            child: Image.asset('assets/icons/shapes png-02.png', height: 200),
           ),
           Positioned(
             right: 0,
             top: 200,
-            child: Image.asset(
-              'assets/icons/shapes png-03.png',
-              height: 200,
-            ),
+            child: Image.asset('assets/icons/shapes png-03.png', height: 200),
           ),
-          
+
           // Main Content
           SafeArea(
             child: LayoutBuilder(
@@ -86,7 +83,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         children: [
                           // Top Bar with Time/Language
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20.w,
+                              vertical: 10.h,
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -100,52 +100,54 @@ class _SignInScreenState extends State<SignInScreen> {
                               ],
                             ),
                           ),
-                          
+
                           const Spacer(flex: 1),
-                          
+
                           // Rotated Logo
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            padding: EdgeInsets.symmetric(horizontal: 40.w),
                             child: RotatedBox(
                               quarterTurns: 1,
                               child: Image.asset(
                                 'assets/logos/Washtron Orange BG Without tagline -01.png',
-                                height: constraints.maxHeight * 0.55, // Increased height
+                                height:
+                                    constraints.maxHeight *
+                                    0.55, // Increased height
                                 fit: BoxFit.contain,
                               ),
                             ),
                           ),
-                          
+
                           const Spacer(flex: 1),
-                          
+
                           // Welcome Text
-                          const Text(
+                          Text(
                             'Welcome back',
                             style: TextStyle(
-                              fontSize: 28,
+                              fontSize: 28.sp,
                               fontWeight: FontWeight.w500,
                               color: Colors.white,
                             ),
                           ),
-                          
-                          const SizedBox(height: 16),
-                          
+
+                          SizedBox(height: 16.h),
+
                           // Description
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 40),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 40.w),
                             child: Text(
                               'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 color: Colors.white70,
                                 height: 1.5,
                               ),
                             ),
                           ),
-                          
-                          const SizedBox(height: 20),
-                          
+
+                          SizedBox(height: 20.h),
+
                           // Indicators (dots)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -155,15 +157,15 @@ class _SignInScreenState extends State<SignInScreen> {
                               _buildDot(false),
                             ],
                           ),
-                          
-                          const SizedBox(height: 30),
-                          
+
+                          SizedBox(height: 30.h),
+
                           // Log in Button
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            padding: EdgeInsets.symmetric(horizontal: 40.w),
                             child: SizedBox(
                               width: double.infinity,
-                              height: 56,
+                              height: 56.h,
                               child: ElevatedButton(
                                 onPressed: () {
                                   _showLoginSheet(context);
@@ -172,14 +174,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                   backgroundColor: Colors.white,
                                   foregroundColor: const Color(0xFFFF6B00),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(30.r),
                                   ),
                                   elevation: 0,
                                 ),
-                                child: const Text(
+                                child: Text(
                                   'Log in',
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -187,16 +189,16 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 20),
-                          
+                          SizedBox(height: 20.h),
+
                           // Bottom Divider
                           Container(
-                            width: 150,
+                            width: 150.w,
                             height: 1,
                             color: Colors.white70,
                           ),
-                          
-                          const SizedBox(height: 20),
+
+                          SizedBox(height: 20.h),
                         ],
                       ),
                     ),
@@ -228,150 +230,260 @@ class _SignInScreenState extends State<SignInScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        height: MediaQuery.of(context).size.height * 0.75,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-        ),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      builder: (context) => Consumer<AuthProvider>(
+        builder: (context, authProvider, _) => Container(
+          height: MediaQuery.of(context).size.height * 0.80,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+          ),
+          padding: EdgeInsets.only(
+            left: 24.w,
+            right: 24.w,
+            top: 24.h,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                // Header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller: _passwordController,
-              obscureText: _obscurePassword,
-              decoration: const InputDecoration(labelText: 'Password'),
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _signIn,
-                child: const Text('Sign In'),
-              ),
-            ),
-            
-            const SizedBox(height: 20),
-            
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Don't have an account? ", style: TextStyle(color: Colors.grey)),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _showSignUpSheet(context);
-                  },
-                  child: const Text('Sign Up', style: TextStyle(color: Color(0xFFFF6B00))),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
-  void _showSignUpSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        height: MediaQuery.of(context).size.height * 0.75,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-        ),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Sign Up',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                SizedBox(height: 24.h),
+
+                // Email Field
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    prefixIcon: const Icon(Icons.email_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[50],
+                  ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.pop(context),
+
+                SizedBox(height: 16.h),
+
+                // Password Field
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: _obscurePassword,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[50],
+                  ),
+                ),
+
+                SizedBox(height: 24.h),
+
+                // Error Message
+                if (authProvider.errorMessage != null)
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.red[50],
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.red[300]!),
+                    ),
+                    child: Text(
+                      authProvider.errorMessage!,
+                      style: TextStyle(color: Colors.red[700]),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+
+                // Email Sign In Button
+                SizedBox(
+                  height: 50.h,
+                  child: ElevatedButton(
+                    onPressed: authProvider.isLoading ? null : _signIn,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppTheme.primaryColor,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                    ),
+                    child: authProvider.isLoading
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
+                              ),
+                            ),
+                          )
+                        : Text(
+                            'Sign In with Email',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                  ),
+                ),
+
+                SizedBox(height: 20.h),
+
+                // OR Divider
+                Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.grey[400])),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        'OR',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                    Expanded(child: Divider(color: Colors.grey[400])),
+                  ],
+                ),
+
+                SizedBox(height: 20.h),
+
+                // Google Sign In Button
+                SizedBox(
+                  height: 50.h,
+                  child: ElevatedButton.icon(
+                    onPressed: authProvider.isLoading
+                        ? null
+                        : _signInWithGoogle,
+                    icon: Image.asset(
+                      'assets/icons/google_icon.png',
+                      height: 24.sp,
+                      width: 24.sp,
+                      errorBuilder: (context, error, stackTrace) => Icon(
+                        Icons.g_mobiledata,
+                        size: 24.sp,
+                        color: Colors.red,
+                      ),
+                    ),
+                    label: Text(
+                      'Sign In with Google',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black87,
+                      side: BorderSide(color: Colors.grey[300]!),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      elevation: 0,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 24.h),
+
+                // Sign Up Link
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have an account? ",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SignUpScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Color(0xFFFF6B00),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            // Add Sign Up fields here (e.g., Name, Email, Password, Confirm Password)
-            // For now reusing the controllers for demo purposes or create new ones if needed
-            // Assuming simple sign up for now matching login fields + name maybe?
-            // The user didn't specify fields, just the button and flow.
-            // I'll keep it simple with Email/Password for now to match the existing logic
-            // or redirect to the actual SignUpScreen if it exists and is complex.
-            // The existing code had a SignUpScreen import.
-            // I can just navigate to that screen or embed it here.
-            // Given the "pop up" request, I'll embed fields here.
-            
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Full Name'),
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller: _passwordController,
-              obscureText: _obscurePassword,
-              decoration: const InputDecoration(labelText: 'Password'),
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                   // Implement sign up logic
-                   Navigator.pop(context); // Close sheet
-                   // Navigate to main or show success
-                },
-                child: const Text('Create Account'),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
 
   Future<void> _signIn() async {
-      final authProvider = context.read<AuthProvider>();
-      final success = await authProvider.signIn(
-        _emailController.text.trim(),
-        _passwordController.text,
-      );
+    final authProvider = context.read<AuthProvider>();
+    final success = await authProvider.signIn(
+      _emailController.text.trim(),
+      _passwordController.text,
+    );
 
-      if (success && mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-        );
-      }
+    if (success && mounted) {
+      Navigator.of(
+        context,
+      ).pushReplacement(MaterialPageRoute(builder: (_) => const MainScreen()));
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    final authProvider = context.read<AuthProvider>();
+    final success = await authProvider.signInWithGoogle();
+
+    if (success && mounted) {
+      Navigator.of(
+        context,
+      ).pushReplacement(MaterialPageRoute(builder: (_) => const MainScreen()));
+    }
   }
 }
