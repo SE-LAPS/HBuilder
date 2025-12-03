@@ -9,7 +9,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
     
     <application
-        android:label="hbuilder"
+        android:label="Washtron"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
