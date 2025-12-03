@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../config/theme.dart';
 import '../../providers/auth_provider.dart';
 import '../main/main_screen.dart';
@@ -32,52 +33,59 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.all(24.w),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(height: 10.h),
+                
                 // Logo/Icon
                 Icon(
                   Icons.car_repair,
-                  size: 80,
+                  size: 70.sp,
                   color: AppTheme.primaryColor,
                 ),
                 
-                const SizedBox(height: 20),
+                SizedBox(height: 16.h),
                 
                 // Title
-                const Text(
+                Text(
                   'Create Account',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 28.sp,
                     fontWeight: FontWeight.bold,
                     color: AppTheme.secondaryColor,
                   ),
                 ),
                 
-                const SizedBox(height: 10),
+                SizedBox(height: 8.h),
                 
                 Text(
                   'Sign up to get started',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14.sp,
                     color: AppTheme.greyColor,
                   ),
                 ),
                 
-                const SizedBox(height: 30),
+                SizedBox(height: 24.h),
                 
                 // Name field
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Full Name',
                     hintText: 'Enter your full name',
-                    prefixIcon: Icon(Icons.person_outline),
+                    prefixIcon: const Icon(Icons.person_outline),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[50],
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -87,16 +95,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: 14.h),
                 
                 // Email field
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Email',
                     hintText: 'Enter your email',
-                    prefixIcon: Icon(Icons.email_outlined),
+                    prefixIcon: const Icon(Icons.email_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[50],
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -109,20 +122,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: 14.h),
                 
                 // Phone field
                 TextFormField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Phone Number (Optional)',
                     hintText: 'Enter your phone number',
-                    prefixIcon: Icon(Icons.phone_outlined),
+                    prefixIcon: const Icon(Icons.phone_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[50],
                   ),
                 ),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: 14.h),
                 
                 // Password field
                 TextFormField(
@@ -142,6 +160,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         });
                       },
                     ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[50],
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -154,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: 14.h),
                 
                 // Confirm password field
                 TextFormField(
@@ -174,6 +197,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         });
                       },
                     ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[50],
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -186,28 +214,108 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 
-                const SizedBox(height: 30),
+                SizedBox(height: 24.h),
                 
-                // Sign up button
+                // Email Sign up button
                 Consumer<AuthProvider>(
                   builder: (context, authProvider, child) {
-                    return ElevatedButton(
-                      onPressed: authProvider.isLoading ? null : _signUp,
-                      child: authProvider.isLoading
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    return SizedBox(
+                      height: 50.h,
+                      child: ElevatedButton(
+                        onPressed: authProvider.isLoading ? null : _signUp,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme.primaryColor,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                        ),
+                        child: authProvider.isLoading
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                ),
+                              )
+                            : Text(
+                                'Sign Up with Email',
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            )
-                          : const Text('Sign Up'),
+                      ),
                     );
                   },
                 ),
                 
-                const SizedBox(height: 20),
+                SizedBox(height: 16.h),
+                
+                // OR Divider
+                Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.grey[400])),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        'OR',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                    Expanded(child: Divider(color: Colors.grey[400])),
+                  ],
+                ),
+                
+                SizedBox(height: 16.h),
+                
+                // Google Sign Up Button
+                Consumer<AuthProvider>(
+                  builder: (context, authProvider, child) {
+                    return SizedBox(
+                      height: 50.h,
+                      child: ElevatedButton.icon(
+                        onPressed: authProvider.isLoading
+                            ? null
+                            : _signUpWithGoogle,
+                        icon: Image.asset(
+                          'assets/icons/google_icon.png',
+                          height: 24.sp,
+                          width: 24.sp,
+                          errorBuilder: (context, error, stackTrace) => Icon(
+                            Icons.g_mobiledata,
+                            size: 24.sp,
+                            color: Colors.red,
+                          ),
+                        ),
+                        label: Text(
+                          'Sign Up with Google',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black87,
+                          side: BorderSide(color: Colors.grey[300]!),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          elevation: 0,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                
+                SizedBox(height: 16.h),
                 
                 // Error message
                 Consumer<AuthProvider>(
@@ -280,6 +388,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
           MaterialPageRoute(builder: (_) => const MainScreen()),
         );
       }
+    }
+  }
+  
+  Future<void> _signUpWithGoogle() async {
+    final authProvider = context.read<AuthProvider>();
+    final success = await authProvider.signInWithGoogle();
+
+    if (success && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Signed up with Google successfully!'),
+          backgroundColor: AppTheme.successColor,
+        ),
+      );
+      
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const MainScreen()),
+      );
     }
   }
 
