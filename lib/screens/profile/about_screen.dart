@@ -8,9 +8,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('About App'),
-      ),
+      appBar: AppBar(title: const Text('About App')),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
@@ -22,33 +20,27 @@ class AboutScreen extends StatelessWidget {
               color: AppTheme.primaryColor,
             ),
           ),
-          
+
           const SizedBox(height: 20),
-          
+
           // App Name
           const Text(
-            'HBuilder',
+            'Washtron',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
           ),
-          
+
           const SizedBox(height: 8),
-          
+
           // Version
           Text(
             'Version 1.0.0',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              color: AppTheme.greyColor,
-            ),
+            style: TextStyle(fontSize: 16, color: AppTheme.greyColor),
           ),
-          
+
           const SizedBox(height: 40),
-          
+
           // Description
           Card(
             child: Padding(
@@ -57,15 +49,12 @@ class AboutScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'About HBuilder',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    'About Washtron',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'HBuilder is your ultimate car wash and service management app. '
+                    'Washtron is your ultimate car wash and service management app. '
                     'Find nearby service centers, purchase membership cards, '
                     'manage your vehicles, and enjoy exclusive benefits.',
                     style: TextStyle(
@@ -78,9 +67,9 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Features
           Card(
             child: Padding(
@@ -90,14 +79,17 @@ class AboutScreen extends StatelessWidget {
                 children: [
                   const Text(
                     'Features',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
-                  _buildFeature(Icons.location_on, 'Find nearby service centers'),
-                  _buildFeature(Icons.card_membership, 'Purchase membership cards'),
+                  _buildFeature(
+                    Icons.location_on,
+                    'Find nearby service centers',
+                  ),
+                  _buildFeature(
+                    Icons.card_membership,
+                    'Purchase membership cards',
+                  ),
                   _buildFeature(Icons.qr_code_scanner, 'QR/Barcode scanning'),
                   _buildFeature(Icons.directions_car, 'Vehicle management'),
                   _buildFeature(Icons.business, 'Franchise opportunities'),
@@ -105,47 +97,59 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Links
           Card(
             child: Column(
               children: [
                 ListTile(
-                  leading: Icon(Icons.privacy_tip, color: AppTheme.primaryColor),
+                  leading: Icon(
+                    Icons.privacy_tip,
+                    color: AppTheme.primaryColor,
+                  ),
                   title: const Text('Privacy Policy'),
-                  trailing: Icon(Icons.chevron_right, color: AppTheme.greyColor),
+                  trailing: Icon(
+                    Icons.chevron_right,
+                    color: AppTheme.greyColor,
+                  ),
                   onTap: () => _launchURL('https://hbuilder.com/privacy'),
                 ),
                 const Divider(height: 1),
                 ListTile(
-                  leading: Icon(Icons.description, color: AppTheme.primaryColor),
+                  leading: Icon(
+                    Icons.description,
+                    color: AppTheme.primaryColor,
+                  ),
                   title: const Text('Terms of Service'),
-                  trailing: Icon(Icons.chevron_right, color: AppTheme.greyColor),
+                  trailing: Icon(
+                    Icons.chevron_right,
+                    color: AppTheme.greyColor,
+                  ),
                   onTap: () => _launchURL('https://hbuilder.com/terms'),
                 ),
                 const Divider(height: 1),
                 ListTile(
                   leading: Icon(Icons.web, color: AppTheme.primaryColor),
                   title: const Text('Visit Website'),
-                  trailing: Icon(Icons.chevron_right, color: AppTheme.greyColor),
+                  trailing: Icon(
+                    Icons.chevron_right,
+                    color: AppTheme.greyColor,
+                  ),
                   onTap: () => _launchURL('https://hbuilder.com'),
                 ),
               ],
             ),
           ),
-          
+
           const SizedBox(height: 40),
-          
+
           // Copyright
           Text(
-            '© 2025 HBuilder. All rights reserved.',
+            '© 2025 Washtron. All rights reserved.',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              color: AppTheme.greyColor,
-            ),
+            style: TextStyle(fontSize: 12, color: AppTheme.greyColor),
           ),
         ],
       ),
@@ -157,18 +161,9 @@ class AboutScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Icon(
-            icon,
-            size: 20,
-            color: AppTheme.primaryColor,
-          ),
+          Icon(icon, size: 20, color: AppTheme.primaryColor),
           const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              text,
-              style: const TextStyle(fontSize: 14),
-            ),
-          ),
+          Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
         ],
       ),
     );
@@ -181,6 +176,3 @@ class AboutScreen extends StatelessWidget {
     }
   }
 }
-
-
-
