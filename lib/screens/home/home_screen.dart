@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../config/theme.dart';
 import '../../models/service_center_model.dart';
 import '../../providers/location_provider.dart';
@@ -9,7 +10,6 @@ import '../../services/firestore_service.dart';
 import '../service_center/service_center_detail_screen.dart';
 import '../card_purchase/card_purchase_screen.dart';
 import '../vehicle/add_vehicle_screen.dart';
-import '../franchise/franchise_application_screen.dart';
 import 'map_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HBuilder'),
+        title: const Text('Washtron'),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
@@ -58,25 +58,25 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Banner carousel
             _buildBannerCarousel(),
-            
-            const SizedBox(height: 20),
-            
+
+            SizedBox(height: 20.h),
+
             // Action buttons
             _buildActionButtons(),
-            
-            const SizedBox(height: 30),
-            
+
+            SizedBox(height: 30.h),
+
             // Closest to me section
             _buildSectionTitle('Closest to Me'),
             _buildServiceCentersList(isClosest: true),
-            
-            const SizedBox(height: 30),
-            
+
+            SizedBox(height: 30.h),
+
             // Common washing stations
             _buildSectionTitle('Common Washing Stations'),
             _buildServiceCentersList(isClosest: false),
-            
-            const SizedBox(height: 20),
+
+            SizedBox(height: 20.h),
           ],
         ),
       ),
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildBannerCarousel() {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200,
+        height: 200.h,
         viewportFraction: 1.0,
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 3),
@@ -98,9 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return Container(
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.symmetric(horizontal: 0),
-              decoration: BoxDecoration(
-                color: AppTheme.lightGreyColor,
-              ),
+              decoration: BoxDecoration(color: AppTheme.lightGreyColor),
               child: Image.asset(
                 imagePath,
                 fit: BoxFit.cover,
@@ -109,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Center(
                     child: Icon(
                       Icons.local_car_wash,
-                      size: 60,
+                      size: 60.sp,
                       color: AppTheme.greyColor,
                     ),
                   ),
@@ -124,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildActionButtons() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Row(
         children: [
           _buildActionButton(
@@ -137,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8.w),
           _buildActionButton(
             icon: Icons.card_membership,
             label: 'Card Purchase',
@@ -148,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8.w),
           _buildActionButton(
             icon: Icons.directions_car,
             label: 'Add Vehicle',
@@ -174,24 +172,20 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: onTap,
         child: Card(
           child: Container(
-            height: 110,
-            padding: const EdgeInsets.all(12),
+            height: 110.h,
+            padding: EdgeInsets.all(12.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  icon,
-                  size: 36,
-                  color: AppTheme.primaryColor,
-                ),
-                const SizedBox(height: 8),
+                Icon(icon, size: 36.sp, color: AppTheme.primaryColor),
+                SizedBox(height: 8.h),
                 Text(
                   label,
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 11,
+                  style: TextStyle(
+                    fontSize: 11.sp,
                     fontWeight: FontWeight.w600,
                     height: 1.2,
                   ),
@@ -206,11 +200,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildSectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Text(
         title,
-        style: const TextStyle(
-          fontSize: 20,
+        style: TextStyle(
+          fontSize: 20.sp,
           fontWeight: FontWeight.bold,
           color: AppTheme.secondaryColor,
         ),
@@ -226,9 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return Center(
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: CircularProgressIndicator(
-                color: AppTheme.primaryColor,
-              ),
+              child: CircularProgressIndicator(color: AppTheme.primaryColor),
             ),
           );
         }
@@ -246,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
         List<ServiceCenterModel> centers = snapshot.data!;
-        
+
         // Calculate distances
         final locationProvider = context.watch<LocationProvider>();
         if (locationProvider.currentPosition != null) {
@@ -258,15 +250,17 @@ class _HomeScreenState extends State<HomeScreen> {
               center.longitude,
             );
           }
-          
+
           // Sort by distance
-          centers.sort((a, b) => (a.distance ?? 999).compareTo(b.distance ?? 999));
+          centers.sort(
+            (a, b) => (a.distance ?? 999).compareTo(b.distance ?? 999),
+          );
         }
 
         return ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           itemCount: centers.length,
           itemBuilder: (context, index) {
             return _buildServiceCenterCard(centers[index]);
@@ -287,19 +281,19 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
       child: Card(
-        margin: const EdgeInsets.only(bottom: 12),
+        margin: EdgeInsets.only(bottom: 12.h),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(12.w),
           child: Row(
             children: [
               // Image
               ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: _buildServiceCenterImage(center.imageUrl, 80, 80),
+                borderRadius: BorderRadius.circular(8.r),
+                child: _buildServiceCenterImage(center.imageUrl, 80.w, 80.w),
               ),
-              
-              const SizedBox(width: 12),
-              
+
+              SizedBox(width: 12.w),
+
               // Details
               Expanded(
                 child: Column(
@@ -307,25 +301,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       center.name,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4.h),
                     Row(
                       children: [
                         Icon(
                           Icons.location_on,
-                          size: 16,
+                          size: 16.sp,
                           color: AppTheme.primaryColor,
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Expanded(
                           child: Text(
                             center.location,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               color: AppTheme.greyColor,
                             ),
                             maxLines: 1,
@@ -334,35 +328,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4.h),
                     Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 4.h,
                           ),
                           decoration: BoxDecoration(
                             color: center.isInBusiness
                                 ? AppTheme.successColor
                                 : AppTheme.greyColor,
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(4.r),
                           ),
                           child: Text(
                             center.isInBusiness ? 'In Business' : 'Closed',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
-                              fontSize: 10,
+                              fontSize: 10.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                         if (center.distance != null) ...[
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8.w),
                           Text(
                             '${center.distance!.toStringAsFixed(1)} km',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               color: AppTheme.greyColor,
                               fontWeight: FontWeight.w600,
                             ),
@@ -380,7 +374,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildServiceCenterImage(String imageUrl, double width, double height) {
+  Widget _buildServiceCenterImage(
+    String imageUrl,
+    double width,
+    double height,
+  ) {
     // Check if it's an asset or network image
     if (imageUrl.startsWith('assets/')) {
       return Image.asset(
@@ -417,6 +415,3 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 }
-
-
-
