@@ -3,6 +3,7 @@ class UserModel {
   final String email;
   final String? name;
   final String? phone;
+  final String? profilePictureUrl;
   final DateTime? createdAt;
 
   UserModel({
@@ -10,6 +11,7 @@ class UserModel {
     required this.email,
     this.name,
     this.phone,
+    this.profilePictureUrl,
     this.createdAt,
   });
 
@@ -19,6 +21,7 @@ class UserModel {
       email: map['email'] ?? '',
       name: map['name'],
       phone: map['phone'],
+      profilePictureUrl: map['profilePictureUrl'],
       createdAt: map['createdAt']?.toDate(),
     );
   }
@@ -28,10 +31,8 @@ class UserModel {
       'email': email,
       'name': name,
       'phone': phone,
+      'profilePictureUrl': profilePictureUrl,
       'createdAt': createdAt,
     };
   }
 }
-
-
-
