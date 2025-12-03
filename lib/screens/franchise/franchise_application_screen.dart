@@ -9,26 +9,26 @@ class FranchiseApplicationScreen extends StatefulWidget {
   const FranchiseApplicationScreen({super.key});
 
   @override
-  State<FranchiseApplicationScreen> createState() => _FranchiseApplicationScreenState();
+  State<FranchiseApplicationScreen> createState() =>
+      _FranchiseApplicationScreenState();
 }
 
-class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen> {
+class _FranchiseApplicationScreenState
+    extends State<FranchiseApplicationScreen> {
   final _formKey = GlobalKey<FormState>();
   final FirestoreService _firestoreService = FirestoreService();
-  
+
   final _nameController = TextEditingController();
   final _contactController = TextEditingController();
   final _cityController = TextEditingController();
   final _messageController = TextEditingController();
-  
+
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Apply for Accession'),
-      ),
+      appBar: AppBar(title: const Text('Apply for Accession')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -36,9 +36,9 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
           children: [
             // Company Info Section
             _buildCompanyInfoSection(),
-            
+
             const SizedBox(height: 30),
-            
+
             // Application Form
             _buildApplicationForm(),
           ],
@@ -60,18 +60,14 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
           ),
           child: Row(
             children: [
-              const Icon(
-                Icons.business,
-                color: Colors.white,
-                size: 40,
-              ),
+              const Icon(Icons.business, color: Colors.white, size: 40),
               const SizedBox(width: 16),
               const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'HBuilder Franchise',
+                      'Washtron Franchise',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -80,10 +76,7 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
                     ),
                     Text(
                       'Join our growing network',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                   ],
                 ),
@@ -91,37 +84,35 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
             ],
           ),
         ),
-        
+
         const SizedBox(height: 16),
-        
+
         // Company Address
         _buildInfoCard(
           icon: Icons.location_on,
           title: 'Company Address',
           value: '123 Business Street, Downtown\nCity Center, State 12345',
         ),
-        
+
         const SizedBox(height: 12),
-        
+
         // Working Hours
         _buildInfoCard(
           icon: Icons.access_time,
           title: 'Working Hours',
-          value: 'Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM',
+          value:
+              'Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM',
         ),
-        
+
         const SizedBox(height: 12),
-        
+
         // Contact Phone
         _buildInfoCard(
           icon: Icons.phone,
           title: 'Contact Phone',
           value: '+1 (555) 123-4567',
           trailing: IconButton(
-            icon: Icon(
-              Icons.phone_in_talk,
-              color: AppTheme.primaryColor,
-            ),
+            icon: Icon(Icons.phone_in_talk, color: AppTheme.primaryColor),
             onPressed: () => _makePhoneCall('+15551234567'),
           ),
         ),
@@ -140,11 +131,7 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: AppTheme.primaryColor,
-              size: 32,
-            ),
+            Icon(icon, color: AppTheme.primaryColor, size: 32),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -184,14 +171,11 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
         children: [
           const Text(
             'Fill Application Form',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Name
           TextFormField(
             controller: _nameController,
@@ -207,9 +191,9 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
               return null;
             },
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Contact Number
           TextFormField(
             controller: _contactController,
@@ -226,9 +210,9 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
               return null;
             },
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Franchise City
           TextFormField(
             controller: _cityController,
@@ -244,9 +228,9 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
               return null;
             },
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Message
           TextFormField(
             controller: _messageController,
@@ -264,9 +248,9 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
               return null;
             },
           ),
-          
+
           const SizedBox(height: 30),
-          
+
           // Submit Button
           SizedBox(
             width: double.infinity,
@@ -292,7 +276,7 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
   Future<void> _submitApplication() async {
     if (_formKey.currentState!.validate()) {
       final authProvider = context.read<AuthProvider>();
-      
+
       if (authProvider.user == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please sign in to submit application')),
@@ -350,10 +334,10 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
         _messageController.clear();
       } catch (e) {
         if (!mounted) return;
-        
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
+
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: $e')));
       } finally {
         if (mounted) {
           setState(() {
@@ -365,10 +349,7 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
   }
 
   Future<void> _makePhoneCall(String phoneNumber) async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: phoneNumber,
-    );
+    final Uri launchUri = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(launchUri)) {
       await launchUrl(launchUri);
     }
@@ -383,6 +364,3 @@ class _FranchiseApplicationScreenState extends State<FranchiseApplicationScreen>
     super.dispose();
   }
 }
-
-
-
