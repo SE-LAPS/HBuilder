@@ -10,9 +10,11 @@ class FirestoreService {
     return _firestore
         .collection('serviceCenters')
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => ServiceCenterModel.fromMap(doc.data(), doc.id))
-            .toList());
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => ServiceCenterModel.fromMap(doc.data(), doc.id))
+              .toList(),
+        );
   }
 
   Future<ServiceCenterModel?> getServiceCenter(String id) async {
@@ -33,9 +35,11 @@ class FirestoreService {
         .collection('vehicles')
         .where('userId', isEqualTo: userId)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => VehicleModel.fromMap(doc.data(), doc.id))
-            .toList());
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => VehicleModel.fromMap(doc.data(), doc.id))
+              .toList(),
+        );
   }
 
   Future<void> addVehicle(VehicleModel vehicle) async {
@@ -47,7 +51,10 @@ class FirestoreService {
   }
 
   Future<void> updateVehicle(VehicleModel vehicle) async {
-    await _firestore.collection('vehicles').doc(vehicle.id).update(vehicle.toMap());
+    await _firestore
+        .collection('vehicles')
+        .doc(vehicle.id)
+        .update(vehicle.toMap());
   }
 
   // Franchise Application
@@ -91,11 +98,20 @@ class FirestoreService {
         .where('userId', isEqualTo: userId)
         .orderBy('purchasedAt', descending: true)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => {'id': doc.id, ...doc.data()})
-            .toList());
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => {'id': doc.id, ...doc.data()})
+              .toList(),
+        );
+  }
+
+  // User Profile
+  Future<void> updateUserProfilePicture({
+    required String userId,
+    required String? profilePictureUrl,
+  }) async {
+    await _firestore.collection('users').doc(userId).update({
+      'profilePictureUrl': profilePictureUrl,
+    });
   }
 }
-
-
-
