@@ -177,12 +177,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                     borderRadius: BorderRadius.circular(30.r),
                                   ),
                                   elevation: 0,
+                                  padding: EdgeInsets.symmetric(vertical: 16.h),
                                 ),
                                 child: Text(
                                   'Log in',
                                   style: TextStyle(
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
+                                    height: 1.2,
                                   ),
                                 ),
                               ),
@@ -333,7 +335,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 // Email Sign In Button
                 SizedBox(
-                  height: 50.h,
+                  height: 52.h,
                   child: ElevatedButton(
                     onPressed: authProvider.isLoading ? null : _signIn,
                     style: ElevatedButton.styleFrom(
@@ -342,6 +344,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.r),
                       ),
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
                     ),
                     child: authProvider.isLoading
                         ? const SizedBox(
@@ -359,6 +362,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
+                              height: 1.2,
                             ),
                           ),
                   ),
@@ -389,7 +393,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 // Google Sign In Button
                 SizedBox(
-                  height: 50.h,
+                  height: 52.h,
                   child: ElevatedButton.icon(
                     onPressed: authProvider.isLoading
                         ? null
@@ -410,6 +414,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.black87,
+                        height: 1.2,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -420,6 +425,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       elevation: 0,
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
                     ),
                   ),
                 ),
