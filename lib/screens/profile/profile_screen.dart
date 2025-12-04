@@ -315,11 +315,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
 
       if (image == null) return;
+      if (!mounted) return;
 
       // Crop the image
       final croppedFile = await ImageCropper().cropImage(
         sourcePath: image.path,
         aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+        compressQuality: 85,
+        maxWidth: 1024,
+        maxHeight: 1024,
+        compressFormat: ImageCompressFormat.jpg,
         uiSettings: [
           AndroidUiSettings(
             toolbarTitle: 'Crop Profile Picture',
@@ -327,23 +332,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.square,
             lockAspectRatio: true,
+            hideBottomControls: false,
+            showCropGrid: true,
           ),
           IOSUiSettings(
             title: 'Crop Profile Picture',
             aspectRatioLockEnabled: true,
+            resetAspectRatioEnabled: false,
           ),
         ],
       );
 
       if (croppedFile == null) return;
+      if (!mounted) return;
 
       await _uploadProfilePicture(File(croppedFile.path));
     } catch (e) {
+      debugPrint('Error picking/cropping image: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to pick image: $e'),
+            content: Text('Failed to pick image: ${e.toString()}'),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
           ),
         );
       }
