@@ -173,7 +173,7 @@ class ServiceCenterDetailScreen extends StatelessWidget {
                 
                 // Horizontal membership cards
                 SizedBox(
-                  height: 220,
+                  height: 230,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -402,13 +402,15 @@ class ServiceCenterDetailScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: cardColor,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  minimumSize: const Size(0, 36),
                 ),
                 child: const Text(
                   'Buy Now',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
+                    height: 1.2,
                   ),
                 ),
               ),
