@@ -109,42 +109,103 @@ class _MapScreenState extends State<MapScreen> {
                 }
                 
                 for (var center in filteredCenters) {
+                  // Determine marker color based on distance
+                  Color markerColor;
+                  if (center.distance == null) {
+                    markerColor = AppTheme.primaryColor;
+                  } else if (center.distance! <= 5) {
+                    markerColor = Colors.green;
+                  } else if (center.distance! <= 10) {
+                    markerColor = Colors.orange;
+                  } else if (center.distance! <= 20) {
+                    markerColor = Colors.blue;
+                  } else {
+                    markerColor = AppTheme.primaryColor;
+                  }
+                  
+                  // Don't show if not in business
+                  if (!center.isInBusiness) {
+                    markerColor = Colors.grey;
+                  }
+                  
                   markers.add(
                     Marker(
                       point: LatLng(center.latitude, center.longitude),
-                      width: 80.w,
-                      height: 80.h,
+                      width: 90.w,
+                      height: 90.h,
                       child: GestureDetector(
                         onTap: () => _showCenterPreview(center),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(4.r),
+                                borderRadius: BorderRadius.circular(6.r),
+                                border: Border.all(color: markerColor, width: 1.5),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 4,
+                                    color: Colors.black.withOpacity(0.25),
+                                    blurRadius: 6,
                                     offset: const Offset(0, 2),
                                   ),
                                 ],
                               ),
-                              child: Text(
-                                center.name,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.sp,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (center.distance != null) ...[
+                                    Text(
+                                      '${center.distance!.toStringAsFixed(1)}km',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 9.sp,
+                                        color: markerColor,
+                                      ),
+                                    ),
+                                    SizedBox(width: 4.w),
+                                  ],
+                                  Flexible(
+                                    child: Text(
+                                      center.name,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10.sp,
+                                        color: Colors.black87,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Icon(
-                              Icons.location_on,
-                              color: center.isInBusiness ? AppTheme.primaryColor : Colors.grey,
-                              size: 36.sp,
+                            SizedBox(height: 2.h),
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: markerColor,
+                                  size: 40.sp,
+                                  shadows: [
+                                    Shadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                Positioned(
+                                  top: 8.h,
+                                  child: Icon(
+                                    Icons.local_car_wash,
+                                    color: Colors.white,
+                                    size: 16.sp,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -199,38 +260,82 @@ class _MapScreenState extends State<MapScreen> {
             top: 16.h,
             left: 0,
             right: 0,
-            child: SizedBox(
-              height: 50.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                itemCount: _filters.length,
-                itemBuilder: (context, index) {
-                  final filter = _filters[index];
-                  final isSelected = _selectedFilter == filter;
-                  return Padding(
-                    padding: EdgeInsets.only(right: 8.w),
-                    child: FilterChip(
-                      label: Text(
-                        filter,
-                        style: TextStyle(fontSize: 13.sp),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 50.h,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    itemCount: _filters.length,
+                    itemBuilder: (context, index) {
+                      final filter = _filters[index];
+                      final isSelected = _selectedFilter == filter;
+                      return Padding(
+                        padding: EdgeInsets.only(right: 8.w),
+                        child: FilterChip(
+                          avatar: Icon(
+                            Icons.location_on,
+                            size: 18.sp,
+                            color: isSelected ? AppTheme.primaryColor : Colors.grey[600],
+                          ),
+                          label: Text(
+                            filter,
+                            style: TextStyle(fontSize: 13.sp),
+                          ),
+                          selected: isSelected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _selectedFilter = filter;
+                            });
+                          },
+                          backgroundColor: Colors.white,
+                          selectedColor: AppTheme.primaryColor.withOpacity(0.2),
+                          labelStyle: TextStyle(
+                            color: isSelected ? AppTheme.primaryColor : Colors.black,
+                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          ),
+                          side: BorderSide(
+                            color: isSelected ? AppTheme.primaryColor : Colors.grey[300]!,
+                            width: isSelected ? 2 : 1,
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                // Color Legend
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16.w),
+                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.95),
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
                       ),
-                      selected: isSelected,
-                      onSelected: (selected) {
-                        setState(() {
-                          _selectedFilter = filter;
-                        });
-                      },
-                      backgroundColor: Colors.white,
-                      selectedColor: AppTheme.primaryColor.withOpacity(0.2),
-                      labelStyle: TextStyle(
-                        color: isSelected ? AppTheme.primaryColor : Colors.black,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      ),
-                    ),
-                  );
-                },
-              ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildLegendItem(Colors.green, '0-5km'),
+                      SizedBox(width: 12.w),
+                      _buildLegendItem(Colors.orange, '5-10km'),
+                      SizedBox(width: 12.w),
+                      _buildLegendItem(Colors.blue, '10-20km'),
+                      SizedBox(width: 12.w),
+                      _buildLegendItem(Colors.grey, 'Closed'),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -279,6 +384,28 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildLegendItem(Color color, String label) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          Icons.location_on,
+          color: color,
+          size: 16.sp,
+        ),
+        SizedBox(width: 4.w),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 11.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
+          ),
+        ),
+      ],
     );
   }
 
