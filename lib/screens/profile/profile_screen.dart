@@ -91,13 +91,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         bottom: 0,
                         right: 0,
                         child: GestureDetector(
-                          onTap: _isUploading ? null : () => _showImageOptions(context),
+                          onTap: _isUploading
+                              ? null
+                              : () => _showImageOptions(context),
                           child: Container(
                             padding: EdgeInsets.all(8.w),
                             decoration: BoxDecoration(
                               color: AppTheme.primaryColor,
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 2.w),
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 2.w,
+                              ),
                             ),
                             child: Icon(
                               user?.profilePictureUrl == null
@@ -273,17 +278,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (context.read<AuthProvider>().userModel?.profilePictureUrl != null)
+              if (context.read<AuthProvider>().userModel?.profilePictureUrl !=
+                  null)
                 ListTile(
                   leading: Icon(Icons.delete, color: Colors.red, size: 24.sp),
-                  title: Text('Remove Photo', style: TextStyle(fontSize: 16.sp)),
+                  title: Text(
+                    'Remove Photo',
+                    style: TextStyle(fontSize: 16.sp),
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     _deleteProfilePicture();
                   },
                 ),
               ListTile(
-                leading: Icon(Icons.camera_alt, color: AppTheme.primaryColor, size: 24.sp),
+                leading: Icon(
+                  Icons.camera_alt,
+                  color: AppTheme.primaryColor,
+                  size: 24.sp,
+                ),
                 title: Text('Take Photo', style: TextStyle(fontSize: 16.sp)),
                 onTap: () {
                   Navigator.pop(context);
@@ -291,8 +304,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.photo_library, color: AppTheme.primaryColor, size: 24.sp),
-                title: Text('Choose from Gallery', style: TextStyle(fontSize: 16.sp)),
+                leading: Icon(
+                  Icons.photo_library,
+                  color: AppTheme.primaryColor,
+                  size: 24.sp,
+                ),
+                title: Text(
+                  'Choose from Gallery',
+                  style: TextStyle(fontSize: 16.sp),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(ImageSource.gallery);
@@ -425,7 +445,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       // Delete from Firebase Storage
       if (currentUrl != null) {
-        await _storageService.deleteProfilePicture(userId: userId);
+        await _storageService.deleteProfilePicture(
+          userId: userId,
+          profilePictureUrl: currentUrl,
+        );
       }
 
       // Update user profile
