@@ -172,13 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: onTap,
         child: Card(
           child: Container(
-            height: 110.h,
-            padding: EdgeInsets.all(12.w),
+            height: 115.h,
+            padding: EdgeInsets.all(10.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, size: 36.sp, color: AppTheme.primaryColor),
-                SizedBox(height: 8.h),
+                Icon(icon, size: 34.sp, color: AppTheme.primaryColor),
+                SizedBox(height: 6.h),
                 Text(
                   label,
                   textAlign: TextAlign.center,
