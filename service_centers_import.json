@@ -1,15 +1,15 @@
 {
   "serviceCenters": [
     {
-      "name": "Downtown Premium Wash",
+      "name": "Fort Premium Wash",
       "imageUrl": "assets/images/center1.jpg",
-      "location": "123 Main Street, Downtown, NY 10001",
-      "latitude": 40.7128,
-      "longitude": -74.0060,
+      "location": "123 Galle Road, Colombo Fort, Colombo 00100",
+      "latitude": 6.9344,
+      "longitude": 79.8428,
       "businessHours": "08:00 - 20:00",
-      "contactNumber": "+1-555-0101",
+      "contactNumber": "+94-11-234-5601",
       "isInBusiness": true,
-      "description": "Premium car wash service in downtown Manhattan with state-of-the-art equipment and experienced staff. We offer eco-friendly cleaning solutions.",
+      "description": "Premium car wash service in Colombo Fort with state-of-the-art equipment and experienced staff. We offer eco-friendly cleaning solutions and quick service for busy professionals.",
       "membershipCards": [
         {
           "type": "monthly",
@@ -37,15 +37,15 @@
       ]
     },
     {
-      "name": "Uptown Auto Spa",
+      "name": "Mount Lavinia Auto Spa",
       "imageUrl": "assets/images/center2.jpg",
-      "location": "456 Park Avenue, Uptown, NY 10021",
-      "latitude": 40.7489,
-      "longitude": -73.9680,
+      "location": "456 Galle Road, Mount Lavinia, Colombo 00600",
+      "latitude": 6.8373,
+      "longitude": 79.8631,
       "businessHours": "07:00 - 19:00",
-      "contactNumber": "+1-555-0102",
+      "contactNumber": "+94-11-271-8902",
       "isInBusiness": true,
-      "description": "Luxury auto spa offering premium washing, detailing, and maintenance services. Interior and exterior care specialists.",
+      "description": "Luxury auto spa offering premium washing, detailing, and maintenance services near the beach. Interior and exterior care specialists with sea view.",
       "membershipCards": [
         {
           "type": "monthly",
@@ -73,15 +73,15 @@
       ]
     },
     {
-      "name": "Brooklyn Car Care",
+      "name": "Moratuwa Car Care",
       "imageUrl": "assets/images/center3.jpg",
-      "location": "789 Brooklyn Avenue, Brooklyn, NY 11201",
-      "latitude": 40.6782,
-      "longitude": -73.9442,
+      "location": "789 Galle Road, Moratuwa, Colombo 10400",
+      "latitude": 6.7730,
+      "longitude": 79.8816,
       "businessHours": "06:00 - 22:00",
-      "contactNumber": "+1-555-0103",
+      "contactNumber": "+94-11-264-7103",
       "isInBusiness": true,
-      "description": "Extended hours car wash with membership benefits and loyalty rewards. Convenient location with quick service.",
+      "description": "Extended hours car wash with membership benefits and loyalty rewards. Convenient location with quick service, perfect for commuters heading south.",
       "membershipCards": [
         {
           "type": "monthly",
@@ -109,15 +109,15 @@
       ]
     },
     {
-      "name": "Queens Express Wash",
+      "name": "Dehiwala Express Wash",
       "imageUrl": "assets/images/center4.jpg",
-      "location": "321 Queens Boulevard, Queens, NY 11375",
-      "latitude": 40.7282,
-      "longitude": -73.7949,
+      "location": "321 Galle Road, Dehiwala, Colombo 00600",
+      "latitude": 6.8535,
+      "longitude": 79.8675,
       "businessHours": "07:00 - 21:00",
-      "contactNumber": "+1-555-0104",
+      "contactNumber": "+94-11-272-3404",
       "isInBusiness": true,
-      "description": "Fast and efficient car wash service with automated and hand-wash options. Family-owned and operated since 2010.",
+      "description": "Fast and efficient car wash service with automated and hand-wash options. Family-owned and operated, conveniently located near Dehiwala Zoo.",
       "membershipCards": [
         {
           "type": "monthly",
@@ -145,15 +145,15 @@
       ]
     },
     {
-      "name": "Bronx Auto Detailing",
+      "name": "Maharagama Auto Detailing",
       "imageUrl": "assets/images/center5.jpg",
-      "location": "555 Grand Concourse, Bronx, NY 10451",
-      "latitude": 40.8448,
-      "longitude": -73.9252,
+      "location": "555 High Level Road, Maharagama, Colombo 10280",
+      "latitude": 6.8484,
+      "longitude": 79.9265,
       "businessHours": "08:00 - 18:00",
-      "contactNumber": "+1-555-0105",
+      "contactNumber": "+94-11-285-6705",
       "isInBusiness": true,
-      "description": "Professional detailing services with ceramic coating, paint protection, and interior restoration. Premium service guaranteed.",
+      "description": "Professional detailing services with ceramic coating, paint protection, and interior restoration. Premium service guaranteed with expert technicians.",
       "membershipCards": [
         {
           "type": "monthly",
@@ -181,15 +181,15 @@
       ]
     },
     {
-      "name": "Staten Island Shine",
+      "name": "Kotte Shine Center",
       "imageUrl": "assets/images/center6.jpg",
-      "location": "777 Victory Boulevard, Staten Island, NY 10301",
-      "latitude": 40.6437,
-      "longitude": -74.0831,
+      "location": "777 Parliament Road, Sri Jayawardenepura Kotte, Colombo 10120",
+      "latitude": 6.8897,
+      "longitude": 79.9196,
       "businessHours": "09:00 - 19:00",
-      "contactNumber": "+1-555-0106",
+      "contactNumber": "+94-11-286-9906",
       "isInBusiness": true,
-      "description": "Full-service car wash and detailing center. We use environmentally friendly products and offer vacuum services.",
+      "description": "Full-service car wash and detailing center in the capital city. We use environmentally friendly products and offer vacuum services with modern facilities.",
       "membershipCards": [
         {
           "type": "monthly",
@@ -217,15 +217,15 @@
       ]
     },
     {
-      "name": "Midtown Express Clean",
+      "name": "Battaramulla Express Clean",
       "imageUrl": "assets/images/center7.jpg",
-      "location": "888 5th Avenue, Midtown, NY 10022",
-      "latitude": 40.7614,
-      "longitude": -73.9776,
+      "location": "888 Battaramulla Road, Battaramulla, Colombo 10120",
+      "latitude": 6.9037,
+      "longitude": 79.9180,
       "businessHours": "06:00 - 23:00",
-      "contactNumber": "+1-555-0107",
+      "contactNumber": "+94-11-287-4507",
       "isInBusiness": true,
-      "description": "Convenient midtown location with express service. Perfect for busy professionals. Open late for your convenience.",
+      "description": "Convenient location in the IT district with express service. Perfect for busy professionals working in Battaramulla. Open late for your convenience.",
       "membershipCards": [
         {
           "type": "monthly",
@@ -253,15 +253,15 @@
       ]
     },
     {
-      "name": "Harlem Wash & Shine",
+      "name": "Nugegoda Wash & Shine",
       "imageUrl": "assets/images/center8.jpg",
-      "location": "999 Malcolm X Boulevard, Harlem, NY 10026",
-      "latitude": 40.8075,
-      "longitude": -73.9525,
+      "location": "999 High Level Road, Nugegoda, Colombo 10250",
+      "latitude": 6.8649,
+      "longitude": 79.8997,
       "businessHours": "07:00 - 20:00",
-      "contactNumber": "+1-555-0108",
+      "contactNumber": "+94-11-281-2308",
       "isInBusiness": false,
-      "description": "Community-focused car wash with affordable prices. Currently closed for renovations - reopening soon with upgraded facilities!",
+      "description": "Community-focused car wash in busy Nugegoda shopping area with affordable prices. Currently closed for renovations - reopening soon with upgraded facilities!",
       "membershipCards": [
         {
           "type": "monthly",
@@ -290,6 +290,3 @@
     }
   ]
 }
-
-
-
