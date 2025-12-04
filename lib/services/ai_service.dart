@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class AIService {
-  static const String _apiKey = 'AIzaSyBdkmGFhdjOKUMxr8i6kQ0R3eclfsyFeLY';
+  static const String _apiKey = '';
   late final GenerativeModel _model;
   late final ChatSession _chat;
 
