@@ -220,7 +220,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Consumer<AuthProvider>(
                   builder: (context, authProvider, child) {
                     return SizedBox(
-                      height: 50.h,
+                      height: 52.h,
                       child: ElevatedButton(
                         onPressed: authProvider.isLoading ? null : _signUp,
                         style: ElevatedButton.styleFrom(
@@ -229,6 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.r),
                           ),
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
                         ),
                         child: authProvider.isLoading
                             ? const SizedBox(
@@ -244,6 +245,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
+                                  height: 1.2,
                                 ),
                               ),
                       ),
@@ -278,7 +280,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Consumer<AuthProvider>(
                   builder: (context, authProvider, child) {
                     return SizedBox(
-                      height: 50.h,
+                      height: 52.h,
                       child: ElevatedButton.icon(
                         onPressed: authProvider.isLoading
                             ? null
@@ -299,6 +301,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
+                            height: 1.2,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -309,6 +312,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             borderRadius: BorderRadius.circular(12.r),
                           ),
                           elevation: 0,
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
                         ),
                       ),
                     );
