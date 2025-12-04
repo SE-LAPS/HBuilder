@@ -4,7 +4,7 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 class AIService {
   // IMPORTANT: Replace this with your own valid Google AI API key
   // Get your API key from: https://aistudio.google.com/app/apikey
-  static const String _apiKey = 'AIzaSyAKB4U_g9itwCirNwNyFyQeeI3Mds3yORQ';
+  static const String _apiKey = '';
 
   GenerativeModel? _model;
   ChatSession? _chat;
