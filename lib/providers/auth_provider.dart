@@ -207,17 +207,28 @@ class AuthProvider with ChangeNotifier {
   }
 
   /// Update user profile picture URL
-  void updateProfilePicture(String? url) {
+  Future<void> updateProfilePicture(String? url) async {
     if (_userModel != null) {
-      _userModel = UserModel(
-        uid: _userModel!.uid,
-        email: _userModel!.email,
-        name: _userModel!.name,
-        phone: _userModel!.phone,
-        profilePictureUrl: url,
-        createdAt: _userModel!.createdAt,
-      );
-      notifyListeners();
+      try {
+        // Update Firestore
+        await _firestore.collection('users').doc(_userModel!.uid).update({
+          'profilePictureUrl': url,
+        });
+        
+        // Update local model
+        _userModel = UserModel(
+          uid: _userModel!.uid,
+          email: _userModel!.email,
+          name: _userModel!.name,
+          phone: _userModel!.phone,
+          profilePictureUrl: url,
+          createdAt: _userModel!.createdAt,
+        );
+        notifyListeners();
+      } catch (e) {
+        print('Error updating profile picture in Firestore: $e');
+        rethrow;
+      }
     }
   }
 
