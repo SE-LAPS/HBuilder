@@ -16,7 +16,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
   final AIService _aiService = AIService();
   final List<Map<String, dynamic>> _messages = [
     {
-      'text': 'Hello! I\'m your HBuilder AI assistant. How can I help you today?',
+      'text': 'Hello! I\'m your Washtron AI assistant. How can I help you today? 🚗\n\nI can assist you with:\n• Membership card information\n• Finding service centers\n• Booking services\n• App features and usage\n• Any other questions!',
       'isUser': false,
       'time': DateTime.now(),
     },
