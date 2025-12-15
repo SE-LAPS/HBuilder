@@ -10,6 +10,7 @@ import '../../services/firestore_service.dart';
 import '../service_center/service_center_detail_screen.dart';
 import '../card_purchase/card_purchase_screen.dart';
 import '../vehicle/add_vehicle_screen.dart';
+import '../iot/iot_control_screen.dart';
 import 'map_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -58,6 +59,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Banner carousel
             _buildBannerCarousel(),
+
+            SizedBox(height: 16.h),
+
+            // IOT Test Button
+            _buildIotTestButton(),
 
             SizedBox(height: 20.h),
 
@@ -158,6 +164,37 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildIotTestButton() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: ElevatedButton.icon(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const IotControlScreen()),
+          );
+        },
+        icon: Icon(Icons.settings_remote, size: 24.sp),
+        label: Text(
+          'Test IOT',
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppTheme.primaryColor,
+          foregroundColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 16.h),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          elevation: 2,
+        ),
       ),
     );
   }
